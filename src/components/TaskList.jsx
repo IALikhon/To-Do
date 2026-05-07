@@ -1,8 +1,20 @@
 import TaskItem from "./TaskItem";
-import EditTaskForm from "./EditTaskForm";
+// import EditTaskForm from "./EditTaskForm";
 
-const TaskList = () => {
-  return (<div></div>);
+const TaskList = ({ tasks, showOnlyIncomplete }) => {
+  return (
+    <ul>
+      {tasks
+      .filter((task) => !showOnlyIncomplete || !task.done)
+      .map((task) => {
+        return (
+          <li key={task.id}>
+            <TaskItem task={task} />
+          </li>
+        );
+      })}
+    </ul>
+  );
 };
 
 export default TaskList;
