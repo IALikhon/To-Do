@@ -1,13 +1,14 @@
 import { Trash, Pencil } from "lucide-react";
 
-const TaskItem = ({ task, showOnlyIncomplete }) => {
+const TaskItem = ({ task, toggleTaskDone }) => {
   return (
     <>
       <div style={{ display: "flex", alignItems: "center", flexGrow: "1" }}>
         <input
           type="checkbox"
           checked={task.done}
-          style={{ marginRight: "10px" }}
+          onChange={() => toggleTaskDone(task.id)}
+          style={{ marginRight: "10px", cursor: "pointer"}}
         />
         <span
           style={{

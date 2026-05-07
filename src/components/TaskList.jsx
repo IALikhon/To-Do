@@ -1,7 +1,7 @@
 import TaskItem from "./TaskItem";
 // import EditTaskForm from "./EditTaskForm";
 
-const TaskList = ({ tasks, showOnlyIncomplete }) => {
+const TaskList = ({ tasks, showOnlyIncomplete, toggleTaskDone }) => {
   return (
     <ul>
       {tasks
@@ -9,7 +9,7 @@ const TaskList = ({ tasks, showOnlyIncomplete }) => {
       .map((task) => {
         return (
           <li key={task.id}>
-            <TaskItem task={task} />
+            <TaskItem task={task} toggleTaskDone={toggleTaskDone} />
           </li>
         );
       })}
