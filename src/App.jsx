@@ -30,20 +30,34 @@ const App = () => {
   const addTask = (newTask) => {
     const updatedTasks = [...tasks, newTask];
     setTasks(updatedTasks);
-  }
+  };
+
+  const removeTask = (id) => {
+    const updatedTasks = tasks.filter((t) => t.id !== id);
+    setTasks(updatedTasks);
+  };
+
+  const updateTask = ({ taskId, editText, editPriority }) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === taskId
+        ? { ...task, text: editText, priority: editPriority }
+        : task,
+    );
+    setTasks(updatedTasks)
+  };
 
   const toggleTaskDone = (id) => {
-    const updatedTasks = tasks.map((task) => 
-    task.id === id ? {...task, done : !task.done} : task
+    const updatedTasks = tasks.map((task) =>
+      task.id === id ? { ...task, done: !task.done } : task,
     );
     setTasks(updatedTasks);
-  }
+  };
 
   const sortTasks = () => {
-    const sortedTasks = [...tasks].sort((a,b) => a.priority - b.priority);
+    const sortedTasks = [...tasks].sort((a, b) => a.priority - b.priority);
 
     setTasks(sortedTasks);
-  }
+  };
 
   return (
     <div
@@ -55,13 +69,19 @@ const App = () => {
       }}
     >
       <h2 style={{ textAlign: "center" }}>TO-DO</h2>
-      <TaskForm addTask={addTask}/>
+      <TaskForm addTask={addTask} />
       <TaskControl
         showOnlyIncomplete={showOnlyIncomplete}
         setShowOnlyIncomplete={setShowOnlyIncomplete}
-        sortTasks = {sortTasks}
+        sortTasks={sortTasks}
       />
-      <TaskList tasks={tasks} showOnlyIncomplete={showOnlyIncomplete} toggleTaskDone={toggleTaskDone} />
+      <TaskList
+        tasks={tasks}
+        showOnlyIncomplete={showOnlyIncomplete}
+        toggleTaskDone={toggleTaskDone}
+        removeTask={removeTask}
+        updateTask={updateTask}
+      />
     </div>
   );
 };

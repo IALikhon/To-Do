@@ -1,6 +1,6 @@
 import { Trash, Pencil } from "lucide-react";
 
-const TaskItem = ({ task, toggleTaskDone }) => {
+const TaskItem = ({ task, toggleTaskDone, removeTask, setEditedTaskId }) => {
   return (
     <>
       <div style={{ display: "flex", alignItems: "center", flexGrow: "1" }}>
@@ -8,7 +8,7 @@ const TaskItem = ({ task, toggleTaskDone }) => {
           type="checkbox"
           checked={task.done}
           onChange={() => toggleTaskDone(task.id)}
-          style={{ marginRight: "10px", cursor: "pointer"}}
+          style={{ marginRight: "10px", cursor: "pointer" }}
         />
         <span
           style={{
@@ -38,7 +38,8 @@ const TaskItem = ({ task, toggleTaskDone }) => {
       </div>
 
       <div style={{ display: "flex", gap: "5px" }}>
-        <button
+        <button 
+          onClick={() => setEditedTaskId(task.id)}
           style={{
             borderRadius: "50%",
             backgroundColor: "#ffc107",
@@ -51,6 +52,7 @@ const TaskItem = ({ task, toggleTaskDone }) => {
           <Pencil size={16} />
         </button>
         <button
+          onClick={() => removeTask(task.id)}
           style={{
             borderRadius: "50%",
             backgroundColor: "#dc3545",
